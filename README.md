@@ -1,7 +1,9 @@
-# NYC-website
-## Deploying to Github Pages:
-- run `npm install ` (if first time or dependencies have changed)
-- to deploy use `npm run deploy` on the branch you wish to deploy
-- to view [QA Site (click here)](https://newyorkcoin-nyc.github.io/NYC-site/)
+# NYC-site
+NewYork Coin Community Website Official
 
-## Email addresses obfuscated with: [HTML Entities](http://www.wbwip.com/wbw/emailencoder.html)
+- Integrated mailchimp.
+- Contact form updated.
+- Added Donate page, added link to all pages.
+- Removed News page, instead linked it to current Blog site.
+- Removed Merchants page, instead linked it to nycoinstores
+- misc content changes / updates
