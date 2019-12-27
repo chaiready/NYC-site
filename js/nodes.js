@@ -224,7 +224,8 @@ $(document).ready(function () {
     setInterval(getBlockCount, 180 * 1000);
 
     function getBlockCount() {
-        $.get("https://explorer.nycoin.biz/api/getblockcount", function(data) {
+
+        $.get("https://explorer.nycoin.info/api/getblockcount", function(data) {
 
             $('.block-count').html(data);
 
@@ -236,26 +237,18 @@ $(document).ready(function () {
 
             });
 
-        }).done(function() {
-            console.log("successfully retrieved block count");
-        }).fail(function() {
-            // TODO: Can fall back to some hard coded calculations here
-            console.log("error retrieving block count, using fallback");
-            $.get("https://explorer.nycoin.info/api/getblockcount", function(data) {
-
-                $('.block-count').html(data);
-
-                $('.block-count').counterUp({
-
-                    delay: 10,
-
-                    time: 1000
-
-                });
-
-            })
         })
+            .done(function() {
+                console.log("successfully retrieved block count");
+            })
+            .fail(function() {
+                // TODO: Can fall back to some hard coded calculations here
+                console.log("error retrieving block count");
+            })
+
     }
+
+
 
     getTopCountry();
 
