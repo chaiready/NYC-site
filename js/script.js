@@ -1318,15 +1318,22 @@
                      ********************************************************/
                     var halvingInterval = 500000, nextHalvingHeight = 5000000, nextHalvingDate = new Date();
 
-                    $.get("https://explorer.nycoin.info/api/getblockcount", function (currentBlockHeight) {
+                    $.get("https://explorer.nycoin.biz/api/getblockcount", function (currentBlockHeight) {
                         while(nextHalvingHeight < currentBlockHeight && currentBlockHeight < 7000000) {
                             nextHalvingHeight += halvingInterval;
                         }
                         var blocksToGo = nextHalvingHeight - currentBlockHeight;
                         var secondsToGo = Math.abs(blocksToGo * 30);
                         nextHalvingDate.setSeconds(nextHalvingDate.getSeconds() + secondsToGo);
-                    })
-                        .fail(function() {
+                    }).fail(function() {
+                        $.get("https://explorer.nycoin.info/api/getblockcount", function (currentBlockHeight) {
+                            while(nextHalvingHeight < currentBlockHeight && currentBlockHeight < 7000000) {
+                                nextHalvingHeight += halvingInterval;
+                            }
+                            var blocksToGo = nextHalvingHeight - currentBlockHeight;
+                            var secondsToGo = Math.abs(blocksToGo * 30);
+                            nextHalvingDate.setSeconds(nextHalvingDate.getSeconds() + secondsToGo);
+                        }).fail(function() {
 							console.log('TODO: Use estimates when service is unavailable.');
 							var halvingArray = [
 								'2019-07-05 05:32:00',
@@ -1340,9 +1347,8 @@
 								if (halvingDate > now && nextHalvingDate < now) {
                                     nextHalvingDate = halvingDate;
 								}
-							});
-                        })
-                        .always(function() {
+							});})
+					}).always(function() {
                             var nextHalvingDateString = nextHalvingDate.toISOString()
 								.slice(0,10) + ' ' + nextHalvingDate.toISOString().slice(11,19);
 
